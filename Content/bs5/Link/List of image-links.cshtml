@@ -1,0 +1,25 @@
+@inherits AppCode.Razor.LinksRazor
+@using AppCode.Data
+
+<div class="row links">
+  @foreach (var link in MyLinks)
+  {
+    <div class="col-md-6 p-0 co-linkblock" @Kit.Toolbar.Empty(link).New().Edit().AddExisting().List()>
+
+      @if (link.IsNotEmpty("Image"))
+      {
+        <a href='@link.Link' target='@link.WindowAuto' title="@link.Title">
+          <div class="effect-zoom">
+            @link.Picture("Image", settings: "Content", factor: "1/3", imgAltFallback: link.Title)
+          </div>
+        </a>
+      } else {
+        <div class="bg-primary placeholder"></div>
+      }
+
+      <h4>@link.Title</h4>
+    </div>
+  }
+</div>
+
+@Html.Partial("../shared/Assets.cshtml", new { parts = "scripts,icons"})

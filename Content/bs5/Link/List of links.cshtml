@@ -1,0 +1,34 @@
+@inherits AppCode.Razor.LinksRazor
+@using AppCode.Data
+
+<div class="row">
+  <div class="flexslider announcement-bar">
+      <ul class="slides">  
+        @foreach (var link in MyLinks){
+          <li>
+          <div class="co-linkblock" @Kit.Toolbar.Empty(link).New().Edit().Add().List()>
+            @if (link.IsNotEmpty("Link")) {
+              <a href='@link.Link' target='@link.WindowAuto' title="@link.Title" class="stretched-link">@link.Title</a>
+            }
+          </div>
+          </li>
+          }
+      </ul>
+  </div>
+</div>
+
+
+@Html.Partial("../shared/Assets.cshtml", new { parts = "scripts,icons"})
+
+
+
+<script>
+    // Can also be used with $(document).ready()
+    $(window).load(function () {
+        $('.flexslider.announcement-bar').flexslider({
+            animation: "slide",
+            controlNav: false,
+            directionNav: true
+        });
+    });
+</script>
